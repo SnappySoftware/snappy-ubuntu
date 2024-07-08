@@ -1,0 +1,14 @@
+---
+- name: Install k3s agent on worker nodes
+  hosts: worker_nodes
+  become: yes
+  vars_files:
+    - ../vars/k3s_token.yaml
+
+  tasks:
+    - name: Install k3s agent
+      shell: |
+        curl -sfL https://get.k3s.io | K3S_URL=https://{{ groups['control_plane'][0] }}:6443 K3S_TOKEN={{ k3s_token }} sh -
+      args:
+        executable: /bin/bash
+

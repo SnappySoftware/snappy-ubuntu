@@ -1,0 +1,7 @@
+---
+- name: Install Docker on control plane and worker nodes
+  hosts: control_plane:worker_nodes
+  become: yes
+  roles:
+    - docker
+

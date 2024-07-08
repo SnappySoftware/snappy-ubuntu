@@ -1,0 +1,27 @@
+---
+- name: Download Docker install script
+  get_url:
+    url: https://get.docker.com
+    dest: /tmp/get-docker.sh
+    mode: '0755'
+
+- name: Run Docker install script
+  shell: sh /tmp/get-docker.sh
+
+- name: Create docker group if not exists
+  group:
+    name: docker
+    state: present
+
+- name: Add jenkins user to docker group
+  user:
+    name: jenkins
+    groups: docker
+    append: yes
+
+- name: Ensure docker service is started and enabled
+  service:
+    name: docker
+    state: started
+    enabled: yes
+

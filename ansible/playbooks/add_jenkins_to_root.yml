@@ -1,0 +1,8 @@
+---
+- name: Add Jenkins to Root Group
+  hosts: all
+  become: true
+  tasks:
+    - name: Add Jenkins user to root group
+      command: usermod -aG root jenkins
+

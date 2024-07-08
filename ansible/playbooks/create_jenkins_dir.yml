@@ -1,0 +1,13 @@
+---
+- name: Create /var/jenkins directory on worker_nodes
+  hosts: worker_nodes
+  become: yes
+  tasks:
+    - name: Create /var/jenkins directory with correct permissions
+      file:
+        path: /var/jenkins
+        state: directory
+        owner: jenkins
+        group: jenkins
+        mode: '0755'
+

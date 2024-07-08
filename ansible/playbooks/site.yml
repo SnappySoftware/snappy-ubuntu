@@ -1,0 +1,8 @@
+---
+- name: Update and install Java
+  hosts: all
+  become: yes
+  roles:
+    - common
+    - java
+
